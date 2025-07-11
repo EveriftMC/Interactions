@@ -1,0 +1,13 @@
+name: EveriftInteractions
+version: $version
+api-version: 1.21.5
+author: Strokkur24
+
+main: net.strokkur.interactions.InteractionsPlugin
+bootstrapper: net.strokkur.interactions.InteractionsPluginBootstrap
+loader: net.strokkur.interactions.InteractionsPluginLoader
+
+permissions:
+  interact.command.use:
+    description: Permission for /interact.
+    default: true

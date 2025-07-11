@@ -1,0 +1,6 @@
+package net.strokkur.interactions;
+
+class Versions {
+    public static final String GUICE = "{{ guice }}";
+    public static final String CONFIGURATE = "{{ configurate }}";
+}
