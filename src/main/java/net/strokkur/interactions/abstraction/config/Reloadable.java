@@ -15,19 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.strokkur.interactions.config;
+package net.strokkur.interactions.abstraction.config;
 
-import net.strokkur.interactions.abstraction.config.ActionItemable;
-import net.strokkur.interactions.abstraction.config.BackgroundItemable;
-import net.strokkur.interactions.abstraction.config.GetCommandable;
-import net.strokkur.interactions.abstraction.config.InventoryTitleable;
-import net.strokkur.interactions.abstraction.config.Itemable;
-import net.strokkur.interactions.abstraction.config.Reloadable;
-import net.strokkur.interactions.abstraction.config.Slotable;
+import java.io.IOException;
+import java.nio.file.Path;
 
-public interface InteractionsConfig extends InventoryTitleable, BackgroundItemable, ActionItemable, Reloadable {
-
-    String FILE_NAME = "config.conf";
-
-    interface ActionItem extends Slotable, GetCommandable, Itemable {}
+public interface Reloadable {
+    void reload(Path path) throws IOException;
 }

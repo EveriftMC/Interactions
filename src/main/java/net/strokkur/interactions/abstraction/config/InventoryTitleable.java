@@ -15,10 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.strokkur.interactions.gui;
+package net.strokkur.interactions.abstraction.config;
 
-import org.bukkit.entity.Player;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 
-public interface InteractionsMenu {
-    void open(Player player, Player target);
+public interface InventoryTitleable {
+    Component getInventoryTitle(TagResolver... resolvers);
 }

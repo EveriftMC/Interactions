@@ -15,19 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.strokkur.interactions;
+package net.strokkur.interactions.abstraction;
 
-import com.google.inject.AbstractModule;
-import net.strokkur.interactions.config.InteractionsConfig;
-import net.strokkur.interactions.config.InteractionsConfigImpl;
-import net.strokkur.interactions.gui.InteractionsMenu;
-import net.strokkur.interactions.gui.InteractionsMenuFastInv;
-
-class InteractionsModule extends AbstractModule {
-
-    @Override
-    protected void configure() {
-        bind(InteractionsConfig.class).toInstance(new InteractionsConfigImpl());
-        bind(InteractionsMenu.class).to(InteractionsMenuFastInv.class);
-    }
+public interface CommandPerformable {
+    void performCommand(String command);
 }

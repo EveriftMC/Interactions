@@ -15,19 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package net.strokkur.interactions.config;
+package net.strokkur.interactions.gui;
 
-import net.strokkur.interactions.abstraction.config.ActionItemable;
-import net.strokkur.interactions.abstraction.config.BackgroundItemable;
-import net.strokkur.interactions.abstraction.config.GetCommandable;
-import net.strokkur.interactions.abstraction.config.InventoryTitleable;
-import net.strokkur.interactions.abstraction.config.Itemable;
-import net.strokkur.interactions.abstraction.config.Reloadable;
-import net.strokkur.interactions.abstraction.config.Slotable;
+import net.strokkur.interactions.abstraction.CommandPerformable;
+import net.strokkur.interactions.abstraction.InventoryClosable;
+import net.strokkur.interactions.abstraction.Named;
+import net.strokkur.interactions.abstraction.PlayerGettable;
+import net.strokkur.interactions.abstraction.SoundPlayable;
 
-public interface InteractionsConfig extends InventoryTitleable, BackgroundItemable, ActionItemable, Reloadable {
+public interface TargetOpenable {
 
-    String FILE_NAME = "config.conf";
-
-    interface ActionItem extends Slotable, GetCommandable, Itemable {}
+    <P extends CommandPerformable & PlayerGettable & InventoryClosable & SoundPlayable & Named, T extends Named>
+    void open(P player, T target);
 }

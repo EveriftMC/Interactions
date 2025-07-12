@@ -88,11 +88,11 @@ class ConfigModel {
                         .toList())
                     .build());
             }
-            
+
             return stack;
         }
     }
-    
+
     @ConfigSerializable
     static class ActionDefinition {
         public int slot = 1;

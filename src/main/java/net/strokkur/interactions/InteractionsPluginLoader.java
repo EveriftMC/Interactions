@@ -26,7 +26,7 @@ import org.eclipse.aether.repository.RemoteRepository;
 
 @SuppressWarnings("UnstableApiUsage")
 public class InteractionsPluginLoader implements PluginLoader {
-    
+
     @Override
     public void classloader(PluginClasspathBuilder builder) {
         final MavenLibraryResolver resolver = new MavenLibraryResolver();
@@ -34,5 +34,5 @@ public class InteractionsPluginLoader implements PluginLoader {
         resolver.addDependency(new Dependency(new DefaultArtifact("com.google.inject:guice:" + Versions.GUICE), null));
         resolver.addDependency(new Dependency(new DefaultArtifact("org.spongepowered:configurate-hocon:" + Versions.CONFIGURATE), null));
         builder.addLibrary(resolver);
-    }    
+    }
 }

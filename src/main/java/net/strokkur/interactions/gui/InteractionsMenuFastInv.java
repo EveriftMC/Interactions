@@ -17,27 +17,33 @@
  */
 package net.strokkur.interactions.gui;
 
-import com.google.inject.Inject;
 import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
-import net.strokkur.interactions.config.InteractionsConfig;
+import net.strokkur.interactions.abstraction.CommandPerformable;
+import net.strokkur.interactions.abstraction.InventoryClosable;
+import net.strokkur.interactions.abstraction.Named;
+import net.strokkur.interactions.abstraction.PlayerGettable;
+import net.strokkur.interactions.abstraction.SoundPlayable;
+import net.strokkur.interactions.abstraction.config.ActionItemable;
+import net.strokkur.interactions.abstraction.config.BackgroundItemable;
+import net.strokkur.interactions.abstraction.config.InventoryTitleable;
 import net.strokkur.interactions.fastinv.FastInv;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
-import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 
-public class InteractionsMenuFastInv implements InteractionsMenu {
+public class InteractionsMenuFastInv<C extends ActionItemable & BackgroundItemable & InventoryTitleable>
+    implements TargetOpenable {
 
-    private final InteractionsConfig config;
+    private final C config;
 
-    @Inject
-    public InteractionsMenuFastInv(InteractionsConfig config) {
+    public InteractionsMenuFastInv(C config) {
         this.config = config;
     }
 
     @Override
-    public void open(Player player, Player target) {
+    public <P extends CommandPerformable & PlayerGettable & InventoryClosable & SoundPlayable & Named, T extends Named>
+    void open(P player, T target) {
         TagResolver resolvers = TagResolver.resolver(
             TagResolver.resolver("player", Tag.preProcessParsed(player.getName())),
             TagResolver.resolver("target", Tag.preProcessParsed(target.getName()))
@@ -47,8 +53,8 @@ public class InteractionsMenuFastInv implements InteractionsMenu {
 
         inv.setItems(0, 27, config.getBackgroundItem());
 
-        for (InteractionsConfig.ActionItem action : config.getActionItems()) {
-            inv.setItem(action.slot() - 1, action.getItem(resolvers), event -> {
+        for (var action : config.getActionItems()) {
+            inv.setItem(action.getSlot() - 1, action.getItem(resolvers), event -> {
                 String command = action.getCommand(resolvers);
                 if (command != null) {
                     player.performCommand(command);
@@ -57,7 +63,7 @@ public class InteractionsMenuFastInv implements InteractionsMenu {
             });
         }
 
-        inv.open(player);
-        player.playSound(player, Sound.BLOCK_CHEST_OPEN, 1f, 1f);
+        inv.open(player.getPlayer());
+        player.playSound(Sound.BLOCK_CHEST_OPEN);
     }
 }
