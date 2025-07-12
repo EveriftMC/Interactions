@@ -1,5 +1,5 @@
 /*
- * CigarPlugin - Smoke a cigar with style!
+ * Interactions - Simple /interact plugin.
  * Copyright (C) 2025  Strokkur24
  *
  * This program is free software: you can redistribute it and/or modify
